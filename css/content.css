@@ -54,9 +54,16 @@ body {
 }
 
 .user-notes__note {
+   text-overflow: clip;
+   white-space: nowrap;
    padding: 1.5rem 2rem;
    border-bottom: 1px solid var(--secondary-dark-c);
    cursor: pointer;
+   overflow: hidden;
+}
+
+.user-notes__note:hover {
+   background-color: var(--secondary-dark-c);
 }
 
 .user-notes__note:first-child {
@@ -148,7 +155,11 @@ body {
    display: inline-block;
 }
 
-#note-content p, li {
+#note-content p {
+   margin-bottom: 1rem;
+}
+
+#note-content ul li {
    margin-bottom: 1rem;
 }
 

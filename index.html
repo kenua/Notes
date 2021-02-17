@@ -16,12 +16,13 @@
       <section id="left-panel">
          <div class="top-panel__item">
             <button type="button" id="new-note-button" class="button">New note</button>
-            <button type="button" id="clone-right-panel" class="button">Close</button>
+            <button type="button" id="close-right-panel" class="button">Close</button>
          </div>
          <ul id="user-notes">
             <li class="user-notes__note">note 1</li>
-            <li class="user-notes__note">note 1</li>
-            <li class="user-notes__note">note 1</li>
+            <li class="user-notes__note">CSS Selectors</li>
+            <li class="user-notes__note">Welcome to my website!</li>
+            <li class="user-notes__note">lorem ipsun text lol eonf dun fepend sas... CSS Selectors CSS Selectors CSS Selectors CSS Selectors</li>
          </ul>
       </section>
       <!-- LEFT-PANEL END -->
@@ -38,38 +39,40 @@
                <button type="button" id="delete-button" class="button">Delete</button>
             </div>
          </div>
-         <!-- top-panel end -->
-         <div id="form-container">
-            <form>
-               <label for="note-title">Title</label>
-               <input type="text" id="note-title" class="form__input">
-               <label for="note-body">Body</label>
-               <textarea id="note-body" class="form__input" cols="30" rows="10"></textarea>
-               <input type="button" class="button" value="Cancel">
-               <input type="submit" class="button" value="save">
-            </form>
-         </div>
-         <div id="note-content">
-            <h1>Note 1</h1>
-            <ul>
-               <li>step 1</li>
-               <li>step 2</li>
-               <li>step 3
-                  <ul>
-                     <li>step 1</li>
-                     <li>step 2</li>
-                  </ul>
-
-               </li>
-               <li>step 4</li>
-            </ul>
-            <h2>Section 1</h2>
-            <p>Lorem, ipsum dolor sit amet consectetur <strong>adipisicing</strong> elit. Quisquam provident et vero quis ipsa maxime eaque debitis nesciunt, expedita quasi cupiditate qui explicabo eius iste quam eos vel? Harum, sed!</p>
-            <h3>Sub-Section</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur <strong>adipisicing</strong> elit. Quisquam provident et vero quis ipsa maxime eaque debitis nesciunt, expedita quasi cupiditate qui explicabo eius iste quam eos vel? Harum, sed!</p>
-            <h4>sub-sub-Section</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur <strong>adipisicing</strong> elit. Quisquam provident et vero quis ipsa maxime eaque debitis nesciunt, expedita quasi cupiditate qui explicabo eius iste quam eos vel? Harum, sed!</p>
-            <pre>console.log("hello notes!");</pre>
+          <!-- top-panel end -->
+         <div class="right-panel__content">
+            <div id="form-container">
+               <form>
+                  <label for="note-title">Title</label>
+                  <input type="text" id="note-title" class="form__input">
+                  <label for="note-body">Body</label>
+                  <textarea id="note-body" class="form__input" cols="30" rows="10"></textarea>
+                  <input type="button" class="button" value="Cancel">
+                  <input type="submit" class="button" value="save">
+               </form>
+            </div>
+            <div id="note-content">
+               <h1>Note 1</h1>
+               <ul>
+                  <li>step 1</li>
+                  <li>step 2</li>
+                  <li>step 3
+                     <ul>
+                        <li>step 1</li>
+                        <li>step 2</li>
+                     </ul>
+   
+                  </li>
+                  <li>step 4</li>
+               </ul>
+               <h2>Section 1</h2>
+               <p>Lorem, ipsum dolor sit amet consectetur <strong>adipisicing</strong> elit. Quisquam provident et vero quis ipsa maxime eaque debitis nesciunt, expedita quasi cupiditate qui explicabo eius iste quam eos vel? Harum, sed!</p>
+               <h3>Sub-Section</h3>
+               <p>Lorem, ipsum dolor sit amet consectetur <strong>adipisicing</strong> elit. Quisquam provident et vero quis ipsa maxime eaque debitis nesciunt, expedita quasi cupiditate qui explicabo eius iste quam eos vel? Harum, sed!</p>
+               <h4>sub-sub-Section</h4>
+               <p>Lorem, ipsum dolor sit amet consectetur <strong>adipisicing</strong> elit. Quisquam provident et vero quis ipsa maxime eaque debitis nesciunt, expedita quasi cupiditate qui explicabo eius iste quam eos vel? Harum, sed!</p>
+               <pre>console.log("hello notes!");</pre>
+            </div>
          </div>
       </section>
       <!-- RIGHT-PANEL END -->
