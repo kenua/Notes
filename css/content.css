@@ -1,0 +1,59 @@
+body {
+   font-weight: 400;
+   font-family: "Sora";
+   height: 100%;
+}
+
+/* BUTTONS */
+.button {
+   font-weight: inherit;
+   font-family: inherit;
+   background-color: var(--secondary-c);
+   color: var(--text-c);
+   height: 5rem;
+   padding: 0 2rem;
+   border: none;
+   display: block;
+   cursor: pointer;
+}
+
+.button:hover {
+   background-color: var(--secondary-dark-c);
+}
+
+/* CONTENT */
+#content {
+   color: var(--text-c);
+   height: 100%;
+   position: relative;
+   overflow: hidden;
+}
+
+/* LEFT-PANEL */
+#left-panel {
+   background-color: var(--secondary-c);
+   width: 100%;
+   height: 100vh;
+   position: absolute;
+   top: 0;
+   right: 100%;
+}
+
+#new-note-button {
+   width: 100%;
+}
+
+#user-notes {
+   font-size: 16px;
+   overflow-y: auto;
+}
+
+.user-notes__note {
+   padding: 1.5rem 2rem;
+   border-bottom: 1px solid var(--secondary-dark-c);
+   cursor: pointer;
+}
+
+.user-notes__note:first-child {
+   border-top: 1px solid var(--secondary-dark-c);
+}

@@ -6,29 +6,42 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="author" content="Kenua">
    <title>Notes</title>
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400&display=swap" rel="stylesheet"> 
+   <link rel="stylesheet" href="css/main.css" type="text/css">
 </head>
 <body>
-   <main>
+   <main id="content">
       <!-- LEFT-PANEL -->
       <section id="left-panel">
-         <button type="button" id="new-note-button">New note</button>
-         <ul id="user-notes"></ul>
+         <button type="button" id="new-note-button" class="button">New note</button>
+         <ul id="user-notes">
+            <li class="user-notes__note">note 1</li>
+            <li class="user-notes__note">note 1</li>
+            <li class="user-notes__note">note 1</li>
+         </ul>
       </section>
       <!-- LEFT-PANEL END -->
       <section id="right-panel">
          <!-- top-panel -->
          <div id="top-panel">
             <div class="top-panel__left">
-               <button type="button" id="toggle-button">Menu</button>
-               <h1 id="current-note-title"></h1>
+               <button type="button" id="toggle-button" class="button">Menu</button>
+               <h1 id="current-note-title">Note 1</h1>
             </div>
             <div class="top-panel__right">
-               <button type="button" id="edit-button">Edit</button>
-               <button type="button" id="delete-button">Delete</button>
+               <button type="button" id="edit-button" class="button">Edit</button>
+               <button type="button" id="delete-button" class="button">Delete</button>
             </div>
          </div>
          <!-- top-panel end -->
-         <div id="form-container"></div>
+         <div id="form-container">
+            <form>
+               <input type="text" id="note-title">
+               <textarea id="note-body" cols="30" rows="10"></textarea>
+               <input type="submit" class="button">
+            </form>
+         </div>
          <div id="note-content"></div>
       </section>
    </main>
