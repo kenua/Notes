@@ -1,7 +1,7 @@
 body {
    font-weight: 400;
    font-family: "Sora";
-   height: 100%;
+  /*  height: 100%; */
 }
 
 /* BUTTONS */
@@ -34,9 +34,13 @@ body {
    background-color: var(--secondary-c);
    width: 100%;
    height: 100vh;
-   position: absolute;
+   position: fixed;
    top: 0;
    right: 100%;
+}
+
+#left-panel.left-panel--open {
+   right: 0%;
 }
 
 #new-note-button {
@@ -101,7 +105,7 @@ body {
 .form__input {
    font-family: "Sora";
    letter-spacing: .1rem;
-   background-color: var(--secondary-light-c);
+   background-color: var(--secondary-c);
    color: black;
    width: 100%;
    margin-bottom: 2rem;
@@ -111,11 +115,45 @@ body {
 }
 
 .form__input:focus {
-   background-color: white;
+   background-color: var(--secondary-dark-c);
 }
 
-#form-container input[type="submit"] {
-   width: 70%;
+#form-container input.button {
+   display: inline-block;
    height: 6rem;
-   margin: 0 auto;
+}
+
+/* NOTE CONTENT */
+#note-content {
+   font-size: 15px;
+   padding: 1rem;
+}
+
+#note-content h1, h2, h3, h4, h5, h6 {
+   margin: 1.6rem 0;
+}
+
+#note-content ul, ol {
+   padding-left: 2rem;
+   margin: 1.25rem 0;
+}
+
+#note-content li::before {
+   content: "";
+   background-color: var(--text-c);
+   width: 5px;
+   height: 5px;
+   margin: 0 1rem;
+   border-radius: 10px;
+   display: inline-block;
+}
+
+#note-content p, li {
+   margin-bottom: 1rem;
+}
+
+#note-content pre {
+   font-size: 90%;
+   background-color: #f2f7f8;
+   padding: .5rem;
 }
