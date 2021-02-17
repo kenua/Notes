@@ -10,7 +10,7 @@ body {
    font-family: inherit;
    background-color: var(--secondary-c);
    color: var(--text-c);
-   height: 5rem;
+  /*  height: 5rem; */
    padding: 0 2rem;
    border: none;
    display: block;
@@ -41,6 +41,7 @@ body {
 
 #new-note-button {
    width: 100%;
+   height: 6rem;
 }
 
 #user-notes {
@@ -56,4 +57,65 @@ body {
 
 .user-notes__note:first-child {
    border-top: 1px solid var(--secondary-dark-c);
+}
+
+/* RIGHT PANEL */
+#top-panel {
+   background-color: var(--secondary-c);
+   height: 6rem;
+   display: flex;
+   justify-content: space-between;
+}
+
+.top-panel__item {
+   display: flex;
+}
+
+#top-panel .button {
+   height: 100%;
+}
+
+#current-note-title {
+   line-height: 6rem;
+   padding-left: 2rem;
+}
+
+/* FORM */
+#form-container {
+   margin-top: 2rem;
+   padding: 0 1rem;
+}
+
+#form-container label {
+   font-size: 1.3rem;
+   margin-bottom: .5rem;
+   display: block;
+}
+
+#form-container textarea {
+   max-width: 100%;
+   min-width: 100%;
+   min-height: 20rem;
+}
+
+.form__input {
+   font-family: "Sora";
+   letter-spacing: .1rem;
+   background-color: var(--secondary-light-c);
+   color: black;
+   width: 100%;
+   margin-bottom: 2rem;
+   padding: 1.5rem;
+   display: block;
+   border: none;
+}
+
+.form__input:focus {
+   background-color: white;
+}
+
+#form-container input[type="submit"] {
+   width: 70%;
+   height: 6rem;
+   margin: 0 auto;
 }
