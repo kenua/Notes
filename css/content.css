@@ -62,6 +62,10 @@ body {
    overflow: hidden;
 }
 
+.user-notes__note--selected {
+   background-color: var(--secondary-dark-c);
+}
+
 .user-notes__note:hover {
    background-color: var(--secondary-dark-c);
 }
@@ -136,7 +140,7 @@ body {
    padding: 1rem;
 }
 
-#note-content h1, h2, h3, h4, h5, h6 {
+#note-content h1, #note-content h2, #note-content h3, #note-content h4, #note-content h5, #note-content h6 {
    margin: 1.6rem 0;
 }
 

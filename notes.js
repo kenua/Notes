@@ -6,11 +6,14 @@ let notes = (function() {
    const getNotes = function() { // returns notesSaved
       return notesSaved;
    };
+   const getIndex = function() {
+      return index;
+   }
    const add = function(title = "", body = "") { // creates a new object inside notesSaved
       title = String(title);
       body = String(body);
 
-      if (title !== "" && title.length > 1 && body !== "" && body.length > 1) {
+      if (title !== "" && title.length > 0 && body !== "" && body.length > 0) {
          notesSaved[index] = { title, body };
          index++;
       }
@@ -27,6 +30,18 @@ let notes = (function() {
       notesSaved = {};
       return this;
    };
+   const modify = function(pos = null, title = "", body = "") {
+      let indexes = Object.keys(notesSaved);
+      let canModify = false;
+   
+      indexes.forEach(element => (pos == element) ? canModify = true : null);
+
+      if (canModify && title !== "" && title.length > 0 && body !== "" && body.length > 0) {
+         notesSaved[pos].title = title;
+         notesSaved[pos].body = body;
+      }
+      return this;
+   }
    const saveNotes = function() { // save notes in user's machine
       // check if localStorage exists
       if (window.localStorage) {
@@ -66,14 +81,16 @@ let notes = (function() {
 
    return {
       getNotes,
+      getIndex,
       add,
       remove,
+      modify,
       clear,
       saveNotes,
       getSavedNotes,
    };
 })();
 
-notes.add("note 1", "# note 1 ## About this note...")
+/* notes.add("note 1", "# note 1 ## About this note...")
      .add("note 2", "# note 2 ## About this note...")
-     .add("note 3", "# note 3 ## About this note...");
+     .add("note 3", "# note 3 ## About this note..."); */

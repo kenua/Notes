@@ -18,7 +18,7 @@
             <button type="button" id="new-note-button" class="button">New note</button>
             <button type="button" id="close-right-panel" class="button">Close</button>
          </div>
-         <ul id="user-notes">
+         <ul id="notes-list">
            <!--  <li class="user-notes__note">note 1</li>
             <li class="user-notes__note">CSS Selectors</li>
             <li class="user-notes__note">Welcome to my website!</li>
@@ -32,7 +32,7 @@
          <div id="top-panel">
             <div class="top-panel__item ">
                <button type="button" id="toggle-button" class="button">Menu</button>
-               <!-- <h1 id="current-note-title">Note 1</h1> -->
+               <h1 id="current-note-title"></h1>
             </div>
             <div class="top-panel__item">
                <button type="button" id="edit-button" class="button">Edit</button>
@@ -77,6 +77,9 @@
       </section>
       <!-- RIGHT-PANEL END -->
    </main>
-   <script src="notes.js"></script>
+   <script type="text/javascript" src="dist/purify.min.js"></script>
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+   <script type="text/javascript" src="notes.js"></script>
+   <script type="text/javascript" src="notes-init.js"></script>
 </body>
 </html>
