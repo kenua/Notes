@@ -1,96 +1,72 @@
 "use strict";
-
-let notes = (function() {
-   let notesSaved = {};     // holds the user's notes 
-   let index = 0;           // used to index the identifier of a note inside notesSaved
-   const getNotes = function() { // returns notesSaved
-      return notesSaved;
-   };
-   const getIndex = function() {
-      return index;
-   }
-   const add = function(title = "", body = "") { // creates a new object inside notesSaved
+/* 
+   Notes object 
+   This object stores, creates and removes notes.
+*/
+const notes = {
+   _notes: {},
+   _index: 0,
+   get notes() {
+      return this._notes;
+   },
+   get index() {
+      return this._index;
+   },
+   add(title = "", body = "") { // adds the object to _notes
       title = String(title);
       body = String(body);
-
       if (title !== "" && title.length > 0 && body !== "" && body.length > 0) {
-         notesSaved[index] = { title, body };
-         index++;
+         this._notes[this._index] = { title, body };
+         this._index++;
       }
-
       return this;
-   };
-   const remove = function(pos = null) { // removes a note inside notesSaved
-      pos = Number(pos);
-      if (isNaN(pos) || pos > index) return this;
-      delete notesSaved[pos];
+   },
+   remove(index = null) { // removes an object in _notes
+      index = Number(index);
+      if (isNaN(index) || index > this._index) return this;
+      delete this._notes[index];
       return this;
-   };
-   const clear = function() { // clears notesSaved
-      notesSaved = {};
-      return this;
-   };
-   const modify = function(pos = null, title = "", body = "") {
-      let indexes = Object.keys(notesSaved);
+   },
+   modify(index = 0, newTitle = "", newBody = "") { // modifies an object in _notes
+      let indexes = Object.keys(this._notes);
       let canModify = false;
-   
-      indexes.forEach(element => (pos == element) ? canModify = true : null);
 
-      if (canModify && title !== "" && title.length > 0 && body !== "" && body.length > 0) {
-         notesSaved[pos].title = title;
-         notesSaved[pos].body = body;
+      indexes.forEach(key => (index == key) ? canModify = true : null);
+      if (canModify && newTitle !== "" && newTitle.length > 0 && newBody !== "" && newBody.length > 0) {
+         this._notes[index].title = newTitle;
+         this._notes[index].body = newBody;
       }
       return this;
-   }
-   const saveNotes = function() { // save notes in user's machine
-      // check if localStorage exists
+   },
+   save() { // save _notes in user's machine
+      if (window.localStorage) { // check if localStorage exists
+         if (Object.keys(this._notes).length !== 0) { // save notes in localStorage
+             let data = {
+               notes: this._notes,
+               index: this._index,
+            };
+
+            localStorage.setItem("notes", JSON.stringify(data));
+         } else { // delete data if there is no notes
+            localStorage.removeItem("notes");
+         }
+      }
+      return this;
+   },
+   getData() { // get notes stored in user machine
       if (window.localStorage) {
-         // save notes in localStorage
-         let data = {
-            notes: notesSaved,
-            index: index,
-         };
+         if (localStorage.notes) {
+            try {
+               let data = JSON.parse(localStorage.notes);
 
-         localStorage.setItem("notes", JSON.stringify(data));
-      } else {
-         // save notes inside a cookie
-         let data = JSON.stringify(this.getNotes());
-         document.cookie = `notes=${data}:note:;`;
-         document.cookie = `index=${index}:index:;`;
+               this._notes = data.notes;
+               this._index = data.index;
+               return true;
+            } catch (e) {
+               return false;
+            }
+         }
       }
-
       return this;
-   };
-   const getSavedNotes = function() { // get notes in user's machine
-      if (window.localStorage) {
-         let data = JSON.parse(localStorage.notes);
-
-         notesSaved = data.notes;
-         index = data.index;
-      } else {
-         let data = document.cookie;
-         let notes = data.substring( data.indexOf("notes="), data.indexOf(":note:") ).replace("notes=", "");
-         let index = data.substring( data.indexOf("index="), data.indexOf(":index:") ).replace("index=", "");
-
-         notesSaved = JSON.parse(notes);
-         index = index;
-      }
-
-      return this;
-   };
-
-   return {
-      getNotes,
-      getIndex,
-      add,
-      remove,
-      modify,
-      clear,
-      saveNotes,
-      getSavedNotes,
-   };
-})();
-
-/* notes.add("note 1", "# note 1 ## About this note...")
-     .add("note 2", "# note 2 ## About this note...")
-     .add("note 3", "# note 3 ## About this note..."); */
+   },
+};
