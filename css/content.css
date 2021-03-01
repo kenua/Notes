@@ -22,6 +22,15 @@ body {
    background-color: var(--secondary-dark-c);
 }
 
+.button--menu img {
+   width: 25px;
+   opacity: .5;
+}
+
+.button--menu:hover img {
+   opacity: 1;
+}
+
 /* CONTENT */
 #content {
    color: var(--text-c);
@@ -34,10 +43,12 @@ body {
 #left-panel {
    background-color: var(--secondary-c);
    width: 100%;
+   min-width: 20rem;
    height: 100vh;
    position: fixed;
    top: 0;
    right: 100%;
+   z-index: 100;
    overflow: auto;
 }
 
@@ -54,25 +65,58 @@ body {
    font-size: 16px;
 }
 
-.user-notes__note {
-   text-overflow: clip;
-   white-space: nowrap;
-   padding: 1.5rem 2rem;
+.notes-list__note {
+   line-height: 6rem;
+   height: 6rem;
+   display: flex;
    border-bottom: 1px solid var(--secondary-dark-c);
-   cursor: pointer;
-   overflow: hidden;
 }
 
-.user-notes__note--selected {
-   background-color: var(--secondary-dark-c);
-}
-
-.user-notes__note:hover {
-   background-color: var(--secondary-dark-c);
-}
-
-.user-notes__note:first-child {
+.notes-list__note:first-child {
    border-top: 1px solid var(--secondary-dark-c);
+}
+
+.notes-list__note:hover {
+   background-color: var(--secondary-dark-c);
+}
+
+.notes-list__note--selected {
+   background-color: var(--secondary-dark-c);
+}
+
+.notes-list__title-container {
+   width: 5rem;
+   flex-grow: 1;
+}
+
+.notes-list__title {
+   white-space: nowrap;
+   text-overflow: clip;
+   overflow: hidden;
+   margin-left: 1rem;
+}
+
+.notes-list__title:hover {
+   cursor: zoom-in;
+}
+
+.notes-list__button {
+   background-color: #00000000;
+   height: 100%;
+   padding: 0 1rem;
+   border: none;
+   display: inline-block;
+   opacity: .5;
+   cursor: pointer;
+}
+
+.notes-list__button:hover {
+   opacity: 1;
+}
+
+.notes-list__button img {
+   width: 20px;
+   height: 20px;
 }
 
 /* RIGHT PANEL */
@@ -99,9 +143,8 @@ body {
 }
 
 /* FORM */
-#form-container {
-   margin-top: 2rem;
-   padding: 0 1rem;
+#form {
+   padding: 2rem;
 }
 
 .form__title {
@@ -123,7 +166,7 @@ body {
 }
 
 .form__input {
-   font-family: "Sora";
+   font-family: monospace, "Sora";
    letter-spacing: .1rem;
    background-color: var(--secondary-c);
    color: black;
@@ -146,7 +189,7 @@ body {
 /* NOTE CONTENT */
 #note-content {
    font-size: 15px;
-   padding: 1rem;
+   padding: 2rem;
    list-style: initial;
 }
 
@@ -165,7 +208,8 @@ body {
 
 
 #note-content p {
-   margin-bottom: 1rem;
+   line-height: 1.5;
+   margin-bottom: 1.5rem;
 }
 
 #note-content ul li {

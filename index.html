@@ -16,7 +16,9 @@
       <section id="left-panel">
          <div class="top-panel__item">
             <button type="button" id="new-note-button" class="button">New note</button>
-            <button type="button" id="close-right-panel" class="button">Close</button>
+            <button type="button" id="close-right-panel" class="button button--menu" title="Close Menu">
+               <img src="images/menuButton.svg" alt="Close Menu" width="25">
+            </button>
          </div>
          <ul id="notes-list"></ul>
       </section>
@@ -26,13 +28,12 @@
          <!-- top-panel -->
          <div id="top-panel">
             <div class="top-panel__item ">
-               <button type="button" id="toggle-button" class="button">Menu</button>
+               <button type="button" id="toggle-button" class="button button--menu" title="Open Menu">
+                  <img src="images/menuButton.svg" alt="Open Menu" width="25">
+               </button>
                <h1 id="current-note-title"></h1>
             </div>
-            <div class="top-panel__item">
-               <button type="button" id="edit-button" class="button">Edit</button>
-               <button type="button" id="delete-button" class="button">Delete</button>
-            </div>
+            <div class="top-panel__item"></div>
          </div>
           <!-- top-panel end -->
          <div class="right-panel__content">

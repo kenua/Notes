@@ -8,11 +8,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
    // BUTTONS
    const newNoteBtn = document.getElementById("new-note-button"),
-         editBtn = document.getElementById("edit-button"),
-         deleteBtn = document.getElementById("delete-button"),
          menuBtn = document.getElementById("toggle-button"),
          closeBtn = document.getElementById("close-right-panel");
-   let currentNoteIndex, currentNoteNode;
+   let currentNoteIndex;
 
    function sanitize(value = "", trim = false) {
       if (trim) value = value.trim();
@@ -23,6 +21,12 @@ window.addEventListener("DOMContentLoaded", () => {
    // OPEN AND CLOSE LEFT-PANEL
    menuBtn.addEventListener("click", () => leftPanelNode.classList.add("left-panel--open"), false);
    closeBtn.addEventListener("click", () => leftPanelNode.classList.remove("left-panel--open"), false);
+
+   // OPENS FORM TO CREATE A NEW NOTE
+   newNoteBtn.addEventListener("click", () => {
+      currentNoteTitleNode.innerHTML = "";
+      createForm("create", "New Note");
+   }, false);
 
    // FORM FUNCTIONALITY
    formContainerNode.addEventListener("click", e => {
@@ -52,56 +56,40 @@ window.addEventListener("DOMContentLoaded", () => {
       }
    }, false);
 
-   // SELECTS AND PRINTS A NOTES
+   // SELECT, EDIT, OR DELETE NOTE
    notesListNode.addEventListener("click", e => {
       e.preventDefault();
+      let customAttr = e.target.dataset;
 
-      if (e.target.hasAttribute("data-index")) {
-         let index = +e.target.getAttribute("data-index");
+      if (customAttr.index) { // select and print note
+         let index = +customAttr.index;
          selectNote(index);
          printNote(index);
-
-         for (let i = 0; i < notesListNode.children.length; i++) { // define currentNoteNode value
-            if (+notesListNode.children[i].dataset.index === index) currentNoteNode = notesListNode.children[i];
-         }
-
          currentNoteIndex = index;
          if (leftPanelNode.classList.contains("left-panel--open")) leftPanelNode.classList.remove("left-panel--open"); // close left panel
          if (formContainerNode.innerHTML !== "") formContainerNode.innerHTML = ""; // remove form if it has content
-      }
-   }, false);
 
-   // OPENS FORM TO CREATE A NEW NOTE
-   newNoteBtn.addEventListener("click", () => {
-      createForm("create", "New Note");
-   }, false);
+      } else if (customAttr.button) { // check if target is a button
+         let [btnType, index] = customAttr.button.split(" ");
+         index = +index;
+         let note = notes.notes[index];
 
-   // DELETE CURRENT NOTE
-   deleteBtn.addEventListener("click", e => {
-      e.preventDefault();
-
-      if (!currentNoteNode) return; // if there's no current note, do nothing
-
-      if (confirm("¿Do you want to delete " + currentNoteNode.textContent + "?")) {
-         currentNoteNode = undefined;
-         notes.remove(currentNoteIndex);
-         notes.save();
-         currentNoteIndex = undefined;
-         noteContentNode.innerHTML = "";
-         currentNoteTitleNode.innerHTML = "";
-         createNoteList();
-      }
-   }, false);
-
-   // OPENS THE EDIT FORM
-   editBtn.addEventListener("click", e => {
-      e.preventDefault();
-
-      if (currentNoteNode) {
-         let currentNote = notes.notes[currentNoteIndex];
-         createForm("save-changes", ("Editing " + currentNoteNode.textContent));
-         document.getElementById("note-title").value = currentNote.title;
-         document.getElementById("note-body").value = currentNote.body;
+         if (note) {
+            if (btnType === "edit") {
+               currentNoteIndex = index;
+               createForm("save-changes", ("Editing " + note.title));
+               document.getElementById("note-title").value = note.title;
+               document.getElementById("note-body").value = note.body;
+               
+            } else if (btnType === "delete" && confirm("¿Do you want to delete " + note.title + "?")) {
+               notes.remove(index);
+               notes.save();
+               currentNoteIndex = undefined;
+               noteContentNode.innerHTML = "";
+               currentNoteTitleNode.innerHTML = "";
+               createNoteList();
+            }
+         }
       }
    }, false);
 
@@ -109,9 +97,10 @@ window.addEventListener("DOMContentLoaded", () => {
    function createForm(id, formTitle = "") {
       let content = "";
       noteContentNode.innerHTML = "";
+      formTitle = formTitle.substr(0, 50);
       content += `<form id="form"> <h2 class="form__title">${formTitle}</h2>`;
       content += `<label for="note-title">Title</label> <input type="text" id="note-title" class="form__input" value="note ${(notesListNode.children.length + 1)}">`;
-      content += `<label for="note-body">Body</label> <textarea id="note-body" class="form__input" cols="30" rows="10">lorem ${(notesListNode.children.length + 1)}</textarea>`;
+      content += `<label for="note-body">Body</label> <textarea id="note-body" class="form__input" cols="30" rows="10"></textarea>`;
       content += `<input type="button" class="button" id="cancel" value="Cancel"> <input type="submit" class="button" id="${id}" value="save">`;
       document.getElementById("form-container").innerHTML = content;
       document.getElementById("note-title").focus();
@@ -122,7 +111,7 @@ window.addEventListener("DOMContentLoaded", () => {
    // creates a note inside notes object and prints it into the DOM
    function createNote() {
       let title = document.getElementById("note-title").value,
-         body = document.getElementById("note-body").value;
+          body = document.getElementById("note-body").value;
       title = sanitize(title, true);
       body = sanitize(body);
 
@@ -133,13 +122,6 @@ window.addEventListener("DOMContentLoaded", () => {
       notes.save();
       formContainerNode.innerHTML = "";
       createNoteList();
-
-      for (let key in notes.notes) { // define what note in notesListNode is the current note
-         for (let i = 0; i < notesListNode.children.length; i++) {
-            if (key == notesListNode.children[i].dataset.index) currentNoteNode = notesListNode.children[i];
-         }
-      }
-
       printNote(currentNoteIndex);
       selectNote(currentNoteIndex);
    }
@@ -161,9 +143,22 @@ window.addEventListener("DOMContentLoaded", () => {
       notesListNode.innerHTML = "";
       for (let index in note) {
          let li = document.createElement("li");
-         li.className = "user-notes__note";
+
+         li.className = "notes-list__note";
          li.dataset.index = index;
-         li.textContent = (note[index].title.length > 50) ? note[index].title.substr(0, 50) + "..." : note[index].title;
+         li.innerHTML = `
+            <div class="notes-list__title-container">
+               <p class="notes-list__title" data-index="${index}"> ${(note[index].title.length > 50) ? note[index].title.substr(0, 50) + "..." : note[index].title} </p>
+            </div>
+            <div class="notes-list__buttons">
+               <button type="button" class="notes-list__button" data-button="edit ${index}" title="Edit note">
+                  <img src="images/pencilIcon.svg" data-button="edit ${index}">
+               </button>
+               <button type="button" class="notes-list__button" data-button="delete ${index}" title="Delete note">
+                  <img src="images/trashcanIcon.svg" data-button="delete ${index}">
+               </button>
+            </div>
+         `;
          notesListNode.append(li);
       }
    }

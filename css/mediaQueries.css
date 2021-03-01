@@ -29,6 +29,14 @@
    #left-panel.left-panel--open {
       right: 0%;
    }
+
+   .notes-list__note:hover .notes-list__buttons {
+      display: block;
+   }
+
+   .notes-list__buttons {
+      display: none;
+   }
    
    /* RIGHT PANEL */
    #right-panel {
