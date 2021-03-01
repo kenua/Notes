@@ -8,6 +8,7 @@ body {
 .button {
    font-weight: inherit;
    font-family: inherit;
+   font-size: 1.6rem;
    background-color: var(--secondary-c);
    color: var(--text-c);
   /*  height: 5rem; */
@@ -37,6 +38,7 @@ body {
    position: fixed;
    top: 0;
    right: 100%;
+   overflow: auto;
 }
 
 #left-panel.left-panel--open {
@@ -48,9 +50,8 @@ body {
    height: 6rem;
 }
 
-#user-notes {
+#notes-list {
    font-size: 16px;
-   overflow-y: auto;
 }
 
 .user-notes__note {
@@ -80,6 +81,7 @@ body {
    height: 6rem;
    display: flex;
    justify-content: space-between;
+   overflow-x: auto;
 }
 
 .top-panel__item {
@@ -91,6 +93,7 @@ body {
 }
 
 #current-note-title {
+   white-space: nowrap;
    line-height: 6rem;
    padding-left: 2rem;
 }
@@ -101,9 +104,15 @@ body {
    padding: 0 1rem;
 }
 
+.form__title {
+   font-size: 2rem;
+   text-align: center;
+   margin-bottom: 3rem;
+}
+
 #form-container label {
-   font-size: 1.3rem;
-   margin-bottom: .5rem;
+   font-size: 1.6rem;
+   margin-bottom: 1rem;
    display: block;
 }
 
@@ -138,10 +147,15 @@ body {
 #note-content {
    font-size: 15px;
    padding: 1rem;
+   list-style: initial;
 }
 
 #note-content h1, #note-content h2, #note-content h3, #note-content h4, #note-content h5, #note-content h6 {
    margin: 1.6rem 0;
+}
+
+#note-content h1 {
+   font-size: 2em;
 }
 
 #note-content ul, ol {
@@ -149,15 +163,6 @@ body {
    margin: 1.25rem 0;
 }
 
-#note-content li::before {
-   content: "";
-   background-color: var(--text-c);
-   width: 5px;
-   height: 5px;
-   margin: 0 1rem;
-   border-radius: 10px;
-   display: inline-block;
-}
 
 #note-content p {
    margin-bottom: 1rem;

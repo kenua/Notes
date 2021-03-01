@@ -163,7 +163,7 @@ window.addEventListener("DOMContentLoaded", () => {
          let li = document.createElement("li");
          li.className = "user-notes__note";
          li.dataset.index = index;
-         li.textContent = note[index].title.substr(0, 50);
+         li.textContent = (note[index].title.length > 50) ? note[index].title.substr(0, 50) + "..." : note[index].title;
          notesListNode.append(li);
       }
    }
